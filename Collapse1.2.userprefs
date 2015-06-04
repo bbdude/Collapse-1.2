@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\InventoryScript.cs">
+    <Files>
+      <File FileName="Assets\Scripts\InventoryScript.cs" Line="126" Column="28" />
+      <File FileName="Assets\Scripts\CameraControlScript.cs" Line="24" Column="21" />
+      <File FileName="Assets\Scripts\PlayerControlScript.cs" Line="25" Column="18" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
