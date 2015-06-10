@@ -22,20 +22,20 @@ public class BlockScript : MonoBehaviour {
 	
 		if (secsWithoutLook < 0.2f)
 		{
-			if (currentRender == 2)
+			if (currentRender != 2)
 				rend.material = materials[2];
 			currentRender = 2;
 		}
 		else
 		{
-			if (currentRender == 0)
+			if (currentRender != 0)
 				rend.material = materials[0];
 			currentRender = 0;
 		}
 		if (breakTime < 100)
 		{
 			secsWithoutDmg += 0.1f;
-			if (currentRender == 1)
+			if (currentRender != 1)
 				rend.material = materials[1];
 			currentRender = 1;
 		}
@@ -44,7 +44,7 @@ public class BlockScript : MonoBehaviour {
 		{
 			breakTime = 100;
 			
-			if (currentRender == 0)
+			if (currentRender != 0)
 				rend.material = materials[0];
 			currentRender = 0;
 		}

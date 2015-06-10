@@ -5,11 +5,6 @@ using UnityEngine.UI;
 public class PlayerControlScript : MonoBehaviour {
 
 	public float speed = 6.0f;
-	public float inputModifyFactor;
-	public float gravity = 20.0f;
-	public bool limitDiagonalSpeed = true;
-	//public int DirtHeld = 0;
-	//public int GrassHeld = 0;
 	public GameObject lArm;
 	public Transform lArmGP;
 	private bool lArmRunning = false;
@@ -17,7 +12,6 @@ public class PlayerControlScript : MonoBehaviour {
 	public KeyCode invKey;
 	public bool invUp = false;
 	public PanelScript panel;
-	//public RawImage healthUI;
 	public int health = 10;
 	public int maxHealth = 10;
 	public Image[] lHandImages;
@@ -161,14 +155,7 @@ public class PlayerControlScript : MonoBehaviour {
 		
 		float up = Input.GetAxis("Up");
 		float side = Input.GetAxis("Strafe");
-		
-		//tempBody.velocity = new Vector3(0, tempBody.velocity.y, 0);
-		//tempBody.velocity.z = 0;
 
-		//inputModifyFactor = inputModifyFactor = (up != 0.0 && side != 0.0 && limitDiagonalSpeed)? 0.1f : 1.0f;
-
-		//if (forwordAxis == 0)
-		//	Debug.LogWarning("Working");
 		if (!invUp)
 		{
 			moveForward(up * 2);
@@ -184,21 +171,18 @@ public class PlayerControlScript : MonoBehaviour {
 		bool rayhit = false;
 		if (Physics.Raycast (ray, out hit, 2.0f)) {
 			if (hit.collider.tag == "Block") {
-				hit.collider.SendMessageUpwards ("LookedAt", SendMessageOptions.DontRequireReceiver);
-				rayhit = true;
-			}
-		}
-		if (Input.GetButton("LHand"))
-		{
-			if (!lArmRunning)
-				StartCoroutine(RotateMe(Vector3.right * 60, 0.3f));
-			if (rayhit)
-				hit.collider.SendMessageUpwards ("Break", 1, SendMessageOptions.DontRequireReceiver);
-			/*if (Physics.Raycast (ray, out hit, 2.0f)) {
-				if (hit.collider.tag == "Block") {
+				if (Input.GetButton("LHand"))
+				{
+					if (!lArmRunning)
+						StartCoroutine(RotateMe(Vector3.right * 60, 0.3f));
 					hit.collider.SendMessageUpwards ("Break", 1, SendMessageOptions.DontRequireReceiver);
 				}
-			}*/
+				else
+				{
+					hit.collider.SendMessageUpwards ("LookedAt", SendMessageOptions.DontRequireReceiver);
+				}
+				rayhit = true;
+			}
 		}
 		if(Input.GetButtonUp("LHand"))
 		{
