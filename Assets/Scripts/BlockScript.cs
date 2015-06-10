@@ -10,6 +10,7 @@ public class BlockScript : MonoBehaviour {
 	float secsWithoutLook = 3;
 	public Renderer rend;
 	public GameObject drop;
+	private int currentRender = -1;
 
 	void Start() {
 		rend = GetComponent<Renderer>();
@@ -21,23 +22,31 @@ public class BlockScript : MonoBehaviour {
 	
 		if (secsWithoutLook < 0.2f)
 		{
-			rend.material = materials[2];
+			if (currentRender == 2)
+				rend.material = materials[2];
+			currentRender = 2;
 		}
 		else
 		{
-			rend.material = materials[0];
+			if (currentRender == 0)
+				rend.material = materials[0];
+			currentRender = 0;
 		}
 		if (breakTime < 100)
 		{
 			secsWithoutDmg += 0.1f;
-			rend.material = materials[1];
+			if (currentRender == 1)
+				rend.material = materials[1];
+			currentRender = 1;
 		}
 
 		if (secsWithoutDmg > 0.3f)
 		{
 			breakTime = 100;
 			
-			rend.material = materials[0];
+			if (currentRender == 0)
+				rend.material = materials[0];
+			currentRender = 0;
 		}
 
 		if (breakTime <= 0)

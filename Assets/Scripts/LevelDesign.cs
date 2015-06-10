@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 public class LevelDesign : MonoBehaviour {
 	
 	public GameObject dirt;
@@ -66,8 +65,29 @@ public class LevelDesign : MonoBehaviour {
 		yield return null;
 	}*/
 
-
-	void Start () {
+		public GameObject Dirt
+	{
+		get {return dirt;}
+		set {dirt = value;}
+	}public GameObject Grass
+	{
+		get {return grass;}
+		set {grass = value;}
+	}public GameObject Water
+	{
+		get {return water;}
+		set {water = value;}
+	}public GameObject Stone
+	{
+		get {return stone;}
+		set {stone = value;}
+	}public GameObject Wood
+	{
+		get {return wood;}
+		set {wood = value;}
+    }
+    
+    void Start () {
 		this.transform.position = new Vector3(levelWidth/2,0,levelWidth/2);
 		sun.transform.position = new Vector3(levelWidth/2,sun.transform.position.y,levelWidth/2);
 		player.transform.position = new Vector3(levelWidth/2,sun.transform.position.y,levelWidth/2);
@@ -151,10 +171,10 @@ public class LevelDesign : MonoBehaviour {
 							//if (Random.Range(0 + i,18 + ii) != 4)
 							//{
 								//Random.seed = (int)Time.deltaTime;
-							if (cubes[i,iii,ii] == null)
+							/*if (cubes[i,iii,ii] != null)
 							{
 								Destroy(cubes[i,iii,ii]);
-							}
+							}*/
 							tempPosition = new Vector3(i,iii,ii);
 							cubes[i,iii,ii] = (GameObject)Instantiate(grass,tempPosition,Quaternion.Euler(0,0,0));
 							
@@ -167,9 +187,9 @@ public class LevelDesign : MonoBehaviour {
 						if (cubes[i,iii,ii] == null)
 						{
 							tempPosition = new Vector3(i,iii,ii);
-							if (cubes[i,iii,ii] == null)
+							if (cubes[i,iii,ii] != null)
 							{
-								Destroy(cubes[i,3,ii]);
+								Destroy(cubes[i,iii,ii]);
 							}
 							cubes[i,iii,ii] = (GameObject)Instantiate(dirt,tempPosition,Quaternion.Euler(0,0,0));
 							
@@ -248,13 +268,11 @@ public class LevelDesign : MonoBehaviour {
 		//StartCoroutine(EnableLandScript(0,0));
 	}
 	
-	/*// Update is called once per frame
+	// Update is called once per frame
 	void Update () {
-		if (!ELSRunning)
-		{
-			StartCoroutine(EnableLandScript(0,0));
-		}
-	}*/
+		if (Input.GetKeyDown(KeyCode.Escape))
+			Application.Quit();
+	}
 }
 
 

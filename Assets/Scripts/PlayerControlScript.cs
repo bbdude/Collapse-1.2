@@ -26,6 +26,9 @@ public class PlayerControlScript : MonoBehaviour {
 	public bool lHandUp = false;
 	public bool rHandUp = false;
 	public GameObject[] tools;
+	public LayerMask invUpLayerMask;
+	public LayerMask invDownLayerMask;
+	private int currentMask = 0;
 	// Use this for initialization
 
 	void OnCollisionEnter(Collision collider)
@@ -81,6 +84,17 @@ public class PlayerControlScript : MonoBehaviour {
 		{
 			invUp = !invUp;
 			panel.gameObject.SetActive(!panel.gameObject.activeSelf);
+			if (currentMask == 0)
+			{
+				Camera tempCam = GetComponentInChildren<Camera>();
+				tempCam.cullingMask = invUpLayerMask;
+				currentMask = 1;
+			}else if (currentMask == 1)
+			{
+				Camera tempCam = GetComponentInChildren<Camera>();
+				tempCam.cullingMask = invDownLayerMask;
+				currentMask = 0;
+			}
 		}
 		if (invUp)
 		{
@@ -178,7 +192,7 @@ public class PlayerControlScript : MonoBehaviour {
 		{
 			if (!lArmRunning)
 				StartCoroutine(RotateMe(Vector3.right * 60, 0.3f));
-			if (hit.collider.tag == "Block")
+			if (rayhit)
 				hit.collider.SendMessageUpwards ("Break", 1, SendMessageOptions.DontRequireReceiver);
 			/*if (Physics.Raycast (ray, out hit, 2.0f)) {
 				if (hit.collider.tag == "Block") {
